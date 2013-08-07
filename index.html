@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>RepRap Calculator3 3d打印机计算器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="http://calculator.josefprusa.cz/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://calculator.josefprusa.cz/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://calculator.josefprusa.cz/assets/css/calculator.css" rel="stylesheet">
+    <link href="http://calculator.josefprusa.cz/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+
+
+    <link href="./css" rel="stylesheet" type="text/css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://calculator.josefprusa.cz/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://calculator.josefprusa.cz/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://calculator.josefprusa.cz/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="http://calculator.josefprusa.cz/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="http://calculator.josefprusa.cz/assets/ico/favicon.png">
+
+    
+    <script src="./jquery-1.9.1.min.js"></script><style type="text/css"></style>
+    <script src="./jquery.flot.js"></script>
+    
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="http://www.makerlab.me/calc">3d打印机计算器</a>
+              </li>
+              <li class="">
+                <a href="http://reprap.org/">RepRap project</a>
+              </li>
+              <li class="">
+                <a href="http://josefprusa.cz/">Josef Průša(本计算器的原版作者)</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h1>RepRap Calculator3</h1>
+    <p class="lead">Brand new RepRap Calculator3. The most hipster calculator yet!</p>
+  </div>
+</header>
+
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <li><a href="http://calculator.josefprusa.cz/#steppers"><i class="icon-chevron-right"></i> Stepper motors 步进电机</a></li>
+          <li><a href="./RepRap Calculator3_files/RepRap Calculator3.html"><i class="icon-chevron-right"></i> Acceleration 加速配置</a></li>
+        </ul>
+      </div>
+      <div class="span9">
+
+
+
+        <!-- Typography
+        ================================================== -->
+        <section id="steppers">
+          <a name="steppers"></a> 
+          <div class="page-header">
+            <h1>Stepper Motors 步进电机</h1>
+          </div>
+
+          <div id="belt">
+            <h2 id="headings">Steps per millimeter - belt driven systems(同步带系统，步/毫米)</h2>
+            <p>这里的计算结果理论上是正确的，但你或许还需要进一步的矫正，以达到更好的效果。但这里是不错的起点。The result is theoreticaly right, but you might still need to calibrate your machine to get finest detail. This is good start tho.</p>
+            <div class="calculation">
+              
+    
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Motor step angle 步进电机步距角</label>
+              <label class="span3">Driver microstepping 步进驱动细分</label>
+            </div>
+            <div class="controls controls-row">
+              <select id="StepSize" class="change span3">
+                <option value="1.8" selected="">1.8° (200 per revolution)</option>
+                <option value="0.9">0.9° (400 per revolution)</option>
+                <option value="7.5">7.5° (48 per revolution)</option>
+              </select>
+
+              <select id="MicroStepping" class="change span3">
+                <option value="1">1 - full step 全细分</option>
+                <option value="2">1/2 - half step 2细分</option>
+                <option value="4">1/4 - quater step 4细分</option>
+                <option value="8">1/8 - uStep (Gen6) 8细分</option>
+                <option value="16" selected="">1/16 - uStep (Pololu 4988驱动) 16细分</option>
+                <option value="32">1/32- uStep  32细分</option>
+                <option value="64">1/64- uStep  64细分</option>
+              </select>
+            </div>
+
+
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Belt pitch 同步带节距</label>
+              <label class="span3">Belt presets 常见同步带类型</label>
+            </div>
+            <div class="controls controls-row">
+
+            <div class="input-prepend input-append span3" style="margin-left: 0px;">
+              <input type="text" id="BeltPitch" value="2" size="3" class="change input-small"> 
+              <span class="add-on">mm</span>
+            </div>
+
+            <div class="input-prepend input-append span3">
+            <select id="BeltPresets" class="changePreset">
+              <option value="2.0">2mm 节距 (GT2 mainly)</option>
+              <option value="2.03">MXL belt (2.03mm)</option>
+              <option value="2.5">T2.5 (2.5mm)</option>
+              <option value="3">3mm 节距 (GT2, HTD)</option>
+              <option value="5">5mm 节距 (T5, GT2, HTD)</option>
+              <option value="5.08">0.2" XL belt (5.08mm)</option>
+            </select>
+          </div></div>
+            <label>Pulley tooth count 同步轮齿数</label>
+            <input type="text" id="ToothCount" value="8" class="change">
+                    </div>
+
+                    <table class="table table-striped">
+          <thead><tr>
+            <th>结果</th>
+
+            <td>精度（微米）</td>
+            <td>齿数</td>
+            <td>步距角</td>
+            <td>细分</td>
+            <td>同步带节距</td>
+          </tr></thead>
+
+          <tbody><tr class="success">
+            <td style="background-color:#CBE86B;"><strong class="answer">NaN</strong></td>
+            <td><span class="CopyResolution"></span>微米</td>
+            <td><span class="CopyToothCount">0</span></td>
+            <td><span class="CopyStepSize">0</span>°</td>
+            <td>1/<span class="CopyMicroStepping">0</span>th</td>
+            <td><span class="CopyBeltPitch">0</span>mm</td>
+            </tr></tbody>
+          </table>
+
+
+            <div class="example">
+              <p><strong>M92(G代码指令)</strong> 可以实时设置步/毫米(steps per mm)，下面是以X轴为例子。can set the steps per mm in real time. Here is an example with your result for X axis.</p>
+              <pre>M92 X<span class="answer">NaN</span></pre>
+              <p>如果确定正确后，在固件（marlin）的Configuration.h文件中找到以下行并做修改。</p>
+              <pre>#define DEFAULT_AXIS_STEPS_PER_UNIT   {85.3333, 85.3333,2560,158.8308} //参数分别对应，X，Y，Z，E轴</pre>
+            </div>
+            
+
+            <script type="text/javascript"> 
+
+
+            function SteppersBelt(){ 
+            var StepSize, Microstepping, BeltPitch, ToothCount;
+            StepSize = parseFloat($("#steppers #belt #StepSize").val());
+            Microstepping = parseInt($("#steppers #belt #MicroStepping").val());
+            BeltPitch = parseFloat($("#steppers #belt #BeltPitch").val());
+            ToothCount = parseInt($("#steppers #belt #ToothCount").val());
+            var StepsPerMM;
+            StepsPerMM = ((360/StepSize)*Microstepping)/(BeltPitch*ToothCount);
+            $("#steppers #belt .answer").text(StepsPerMM.toFixed(2)); 
+
+            $("#steppers #belt .CopyResolution").text((1./StepsPerMM)*1000);
+            $("#steppers #belt .CopyToothCount").text(ToothCount);
+            $("#steppers #belt .CopyStepSize").text(StepSize);
+            $("#steppers #belt .CopyMicroStepping").text(Microstepping);
+            $("#steppers #belt .CopyBeltPitch").text(BeltPitch);
+
+
+
+
+            }
+            $("#steppers #belt .changePreset").change(function () {
+              BeltPitchPreset = parseFloat($("#steppers #belt #BeltPresets").val());
+              $("#steppers #belt #BeltPitch").val(BeltPitchPreset);
+              SteppersBelt();
+            });
+            $("#steppers #belt .change").change(function () {
+              SteppersBelt();
+            });
+             
+            </script>
+
+
+          </div> <!-- END OF BELTS -->
+
+          <div id="leadscrew">
+            <h2 id="headings">Steps per millimeter - leadscrew driven systems 丝杆系统，步/毫米</h2>
+            <p>可以计算出电路板应该发送多少脉冲可以让其运动1毫米。Gives you number of steps electronics need to generate to move the axis by 1mm.</p>
+            <div class="calculation">
+              
+    
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Motor step angle 步进电机步距角</label>
+              <label class="span3">Driver microstepping 步进驱动细分</label>
+            </div>
+            <div class="controls controls-row">
+              <select id="StepSize" class="change span3">
+                <option value="1.8">1.8° (200 per revolution)</option>
+                <option value="0.9">0.9° (400 per revolution)</option>
+                <option value="7.5">7.5° (48 per revolution)</option>
+              </select>
+
+              <select id="MicroStepping" class="change span3">
+                <option value="1">1 - full step 全细分</option>
+                <option value="2">1/2 - half step 2细分</option>
+                <option value="4">1/4 - quater step 4细分</option>
+                <option value="8">1/8 - uStep (Gen6) 8细分</option>
+                <option value="16" selected="">1/16 - uStep (Pololu 4988驱动) 16细分</option>
+                <option value="32">1/32- uStep  32细分</option>
+                <option value="32">1/64- uStep  64细分</option>
+              </select>
+            </div>
+
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Leadscrew pitch 丝杆螺纹间距</label>
+              <label class="span3">Presets 预设</label>
+            </div>
+
+            <div class="controls controls-row">
+
+            <div class="input-prepend input-append span3" style="margin-left: 0px;">
+              <input type="text" id="LeadscrewPitch" value="1.25" size="3" class="change input-small"> 
+              <span class="add-on">mm/revolution</span>
+            </div>
+
+            <select id="LeadscrewPresets" class="changePreset span3">
+              <option value="1.25">M8 - 公制 (1.25mm per rotation)</option>
+              <option value="1">M6 - 公制 (1mm per rotation)</option>
+              <option value="0.8">M5 - 公制 (0.8mm per rotation)</option>
+              <option value="12">12 (12mm per rotation)</option>
+              <option value="16">16 (16mm per rotation)</option>
+              <option value="25">25 (25mm per rotation)</option>
+              <option value="1.41111">5/16"-18 imperial coarse (1.41111mm per rotation)</option>
+              <option value="1.270">3/16"-20 imperial (1.270mm per rotation)</option>
+              <option value="1.5875">1/4"-16 Acme (1.5875mm per rotation)</option>
+            </select>
+            </div>
+            <label>Gear ratio 齿轮比</label>
+            
+  <input type="text" id="PulleyMotor" value="1" size="3" class="change input-mini"> :
+  <input type="text" id="PulleyLeadscrew" value="1" size="3" class="change input-mini"> <span class="help-block">Motor电机 : Leadscrew丝杆 (1:1 直接驱动 - Prusa)</span>
+                    </div>
+
+                    <table class="table table-striped">
+          <thead><tr>
+            <th>结果</th>
+            <td></td>
+            <td>步进电机步距角</td>
+            <td>细分</td>
+            <td>齿轮比</td>
+          </tr></thead>
+
+          <tbody><tr class="success">
+            <td style="background-color:#CBE86B;"><strong class="answer">2560.00</strong></td>
+            <td><span class="CopyLeadscrewPitch">1.25</span></td>
+            <td><span class="CopyStepSize">1.8</span>°</td>
+            <td>1/<span class="CopyMicroStepping">16</span>th</td>
+            <td><span class="CopyPulleyMotor">1</span> : <span class="CopyPulleyLeadscrew">1</span></td>
+            </tr></tbody>
+          </table>
+
+
+            <div class="example">
+              <p><strong>M92(G代码指令)</strong> 可以实时设置步/毫米(steps per mm)，下面是以Z轴为例子。can set the steps per mm in real time. Here is an example with your result for Z axis.</p>
+              <pre>M92 Z<span class="answer">2560.00</span></pre>
+            </div>
+            
+
+            <script type="text/javascript"> 
+
+
+            function SteppersLeadscrew(){ 
+            var StepSize, Microstepping, BeltPitch, ToothCount;
+            StepSize = parseFloat($("#steppers #leadscrew #StepSize").val());
+            Microstepping = parseInt($("#steppers #leadscrew #MicroStepping").val());
+            LeadscrewPitch = parseFloat($("#steppers #leadscrew #LeadscrewPitch").val());
+            PulleyMotor = parseInt($("#steppers #leadscrew #PulleyMotor").val());
+            PulleyLeadscrew = parseInt($("#steppers #leadscrew #PulleyLeadscrew").val());
+            var StepsPerMM;
+            
+            StepsPerMM = ((360/StepSize)*Microstepping)/(LeadscrewPitch)*(PulleyLeadscrew/PulleyMotor);
+            $("#steppers #leadscrew .answer").text(StepsPerMM.toFixed(2)); 
+
+            $("#steppers #leadscrew .CopyLeadscrewPitch").text(LeadscrewPitch);
+            $("#steppers #leadscrew .CopyStepSize").text(StepSize);
+            $("#steppers #leadscrew .CopyMicroStepping").text(Microstepping);
+            $("#steppers #leadscrew .CopyPulleyMotor").text(PulleyMotor);
+            $("#steppers #leadscrew .CopyPulleyLeadscrew").text(PulleyLeadscrew);
+
+
+
+
+            }
+            $("#steppers #leadscrew .changePreset").change(function () {
+              LeadscrewPitchPreset = parseFloat($("#steppers #leadscrew #LeadscrewPresets").val());
+              $("#steppers #leadscrew #LeadscrewPitch").val(LeadscrewPitchPreset);
+              SteppersLeadscrew();
+            });
+
+            $("#steppers #leadscrew .change").change(function () {
+              SteppersLeadscrew();
+            });
+            SteppersLeadscrew();
+             
+            </script>
+
+
+          </div> <!-- END OF Leadscrews -->
+
+                    <div id="layerheight">
+            <h2 id="headings">Optimal layer height for your Z axis 最优层高计算</h2>
+            <p>帮你选择合适的打印层高，让Z轴只整步增加。Z轴在非工作状态不会被使能。如果轴停止使能在某个细分位置（不是电机的步距角位置），步进电机会自己跳到距离最近的整步位置，从而导致错误。这种效果会经常发生，哪怕步进电机在使用也很难避免。这个配置对于英制的丝杆更加实用，公制的不常见的层高也会有帮助。Helps you to select layer height in a way, that Z axis moves only by full step increments. Z axis isn't usually enabled during inactivity. If the axis is disabled during micro-step, axis jumps to the closest full step and intorduce error. This effect is occuring to some extent even while leaving the Z axis motors enabled. This is most usefull to machines with imperial leadscrews but also for unusual layer heights with metric leadscrews.</p>
+            <div class="calculation">
+              
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Motor step angle 步进电机步距角</label>
+            </div>
+            <div class="controls controls-row">
+              <select id="StepSize" class="change span3">
+                <option value="200">1.8° (200 per revolution)</option>
+                <option value="400">0.9° (400 per revolution)</option>
+                <option value="48">7.5° (48 per revolution)</option>
+              </select>
+
+          
+            </div>
+            
+            <div class="controls controls-row">
+              <label class="span3" style="margin-left: 0px;">Leadscrew pitch 丝杆螺纹间距</label>
+              <label class="span3">Presets 预设</label>
+            </div>
+
+            <div class="controls controls-row">
+
+            <div class="input-prepend input-append span3" style="margin-left: 0px;">
+              <input type="text" id="LeadscrewPitch" value="1.25" size="3" class="change input-small"> 
+              <span class="add-on">mm/revolution</span>
+            </div>
+
+            <select id="LeadscrewPresets" class="changePreset span3">
+              <option value="1.25">M8 - 公制 (1.25mm per rotation)</option>
+              <option value="1">M6 - 公制 (1mm per rotation)</option>
+              <option value="0.8">M5 - 公制 (0.8mm per rotation)</option>
+              <option value="12">12 (12mm per rotation)</option>
+              <option value="16">16 (16mm per rotation)</option>
+              <option value="25">25 (25mm per rotation)</option>
+              <option value="1.41111">5/16"-18 imperial coarse (1.41111mm per rotation)</option>
+              <option value="1.270">3/16"-20 imperial (1.270mm per rotation)</option>
+              <option value="1.5875">1/4"-16 Acme (1.5875mm per rotation)</option>
+            </select>
+            </div>
+
+            <label>Desired layer height 想要的打印层高</label>
+            <div class="input-prepend input-append">
+              <input type="text" id="DesiredHeight" value="0.3" size="3" class="change input-small"> 
+              <span class="add-on">mm</span>
+            </div>
+
+            <label>Z axis gear ratio Z轴齿轮比</label>
+            
+  <input type="text" id="PulleyMotor" value="1" size="3" class="change input-mini"> :
+  <input type="text" id="PulleyLeadscrew" value="1" size="3" class="change input-mini"> <span class="help-block">Motor电机 : Leadscrew丝杆 (对于直接驱动的为1:1 )</span>
+                    </div>
+
+                    <table class="table table-striped">
+          <thead><tr>
+            <th>层高</th>
+            <td>10cm产生的误差</td>
+            <td>所需步数</td>
+            <td>每步高度</td>
+          </tr></thead>
+
+          <tbody id="FloorSuggested"><tr class="success">
+            <td style="background-color:#CBE86B;"><strong class="answer">0.29375</strong></td>
+            <td><span class="CopyError">0</span>mm</td>
+            <td><span class="CopyStepCount">47</span></td>
+            <td><span class="CopyStepSize">0.00625</span>mm</td>
+            </tr>
+          </tbody>
+
+          <tbody id="Suggested"><tr id="suggestedHeight">
+            <td id="suggestedHighlight" style="background-color: rgb(203, 232, 107);"><strong class="answer">0.3</strong></td>
+            <td><span class="CopyError">0</span>mm</td>
+            <td><span class="CopyStepCount">48</span></td>
+            <td><span class="CopyStepSize">0.00625</span>mm</td>
+            </tr>
+          </tbody>
+
+          <tbody id="CeilSuggested"><tr class="success">
+            <td style="background-color:#CBE86B;"><strong class="answer">0.30625</strong></td>
+            <td><span class="CopyError">0</span>mm</td>
+            <td><span class="CopyStepCount">49</span></td>
+            <td><span class="CopyStepSize">0.00625</span>mm</td>
+            </tr>
+          </tbody>
+          </table>
+
+
+            
+
+            <script type="text/javascript"> 
+
+
+            function SteppersLayerheight(){ 
+            var StepSize, Microstepping, BeltPitch, ToothCount;
+            StepSize = parseFloat($("#steppers #layerheight #StepSize").val());
+            DesiredHeight = parseFloat($("#steppers #layerheight #DesiredHeight").val());
+            LeadscrewPitch = parseFloat($("#steppers #layerheight #LeadscrewPitch").val());
+            PulleyMotor = parseInt($("#steppers #layerheight #PulleyMotor").val());
+            PulleyLeadscrew = parseInt($("#steppers #layerheight #PulleyLeadscrew").val());
+            var StepsPerMM;
+            
+            StepLenght = (parseInt(LeadscrewPitch*1000000)/parseInt(StepSize*1000000))*(PulleyLeadscrew/PulleyMotor);
+            LenghtsPerLayer = (parseInt(DesiredHeight*1000000)/parseInt(StepLenght*1000000));
+            FloorLenghtsPerLayer = Math.floor(LenghtsPerLayer);
+            CeilLenghtsPerLayer = Math.ceil(LenghtsPerLayer);
+
+            if(FloorLenghtsPerLayer == CeilLenghtsPerLayer){
+              // good layer height suggested
+              $("#steppers #layerheight #suggestedHighlight").css("background-color","#CBE86B");
+
+              FloorLenghtsPerLayer--;
+              CeilLenghtsPerLayer++;
+
+              FloorHeight = FloorLenghtsPerLayer*StepLenght;
+              CeilHeight = CeilLenghtsPerLayer*StepLenght;
+              errorSign = 0;
+              errorPer10cm = 0;
+            }else{
+              // not a good layer height suggested
+              $("#steppers #layerheight #suggestedHighlight").css("background-color","#FF8473");
+              FloorHeight = FloorLenghtsPerLayer*StepLenght;
+              FloorHeight = FloorHeight.toPrecision(4);
+              CeilHeight = CeilLenghtsPerLayer*StepLenght;
+              CeilHeight = CeilHeight.toPrecision(4);
+
+              errorPerStep = LenghtsPerLayer - Math.floor(LenghtsPerLayer);
+
+              errorSign = "-";
+              if(errorPerStep > 0.5){
+                errorPerStep = 1-errorPerStep;
+                errorSign = "+";
+              }
+              error10cmsteps = 100/DesiredHeight;
+              errorPer10cm = error10cmsteps*errorPerStep*StepLenght;
+            }
+
+            //alert(LenghtsPerLayer +" "  + FloorLenghtsPerLayer + " - " + CeilLenghtsPerLayer)
+
+
+            // original line
+            $("#steppers #layerheight #Suggested .answer").text(DesiredHeight); 
+            $("#steppers #layerheight #Suggested .CopyStepCount").text(LenghtsPerLayer); 
+            $("#steppers #layerheight #Suggested .CopyStepSize").text(StepLenght); 
+            $("#steppers #layerheight #Suggested .CopyError").text(errorSign+errorPer10cm); 
+
+            // floor value
+            $("#steppers #layerheight #FloorSuggested .answer").text(FloorHeight);
+            $("#steppers #layerheight #FloorSuggested .CopyStepCount").text(FloorLenghtsPerLayer);
+            $("#steppers #layerheight #FloorSuggested .CopyStepSize").text(StepLenght); 
+            $("#steppers #layerheight #FloorSuggested .CopyError").text("0"); 
+
+            // ceil suggested
+            $("#steppers #layerheight #CeilSuggested .answer").text(CeilHeight);
+            $("#steppers #layerheight #CeilSuggested .CopyStepCount").text(CeilLenghtsPerLayer);
+            $("#steppers #layerheight #CeilSuggested .CopyStepSize").text(StepLenght); 
+            $("#steppers #layerheight #CeilSuggested .CopyError").text("0"); 
+
+
+            }
+            $("#steppers #layerheight .changePreset").change(function () {
+              LeadscrewPitchPreset = parseFloat($("#steppers #layerheight #LeadscrewPresets").val());
+              $("#steppers #layerheight #LeadscrewPitch").val(LeadscrewPitchPreset);
+              SteppersLayerheight();
+            });
+
+            $("#steppers #layerheight .change").change(function () {
+              SteppersLayerheight();
+            });
+            SteppersLayerheight();
+             
+            </script>
+
+
+          </div> <!-- END OF layerheight -->
+
+        </section>
+
+        <section id="acceleration">
+          <div class="page-header">
+            <h1>Acceleration 加速度配置</h1>
+          </div>
+          <a name="max-speed"></a> 
+          <div id="maxSpeed">
+            <h2 id="headings">Max speed 最快速度</h2>
+            <p>输入你的加速度配置，轴长度就可以知道达到目标速度所需的时间。Input your acceleration settings, distance/length of axis and you can see you your printer will hit your desired speed and for how long.</p>
+            <div class="calculation">
+              
+            <label>Acceleration 加速度</label>
+            <div class="input-prepend input-append">
+              <input type="text" id="acceleration" value="3000" size="3" class="change input-small"> 
+              <span class="add-on">mm/s<sup>2</sup></span>
+            </div>
+
+            <label>Distance or axis length 轴长度</label>
+            <div class="input-prepend input-append">
+              <input type="text" id="distance" value="200" size="3" class="change input-small"> 
+              <span class="add-on">mm</span>
+            </div>
+
+
+            <label>Desired speed 目标速度</label>
+            <div class="input-prepend input-append">
+              <input type="text" id="speed" value="150" size="3" class="change input-small"> 
+              <span class="add-on">mm/s</span>
+            </div>
+
+                    </div>
+
+                   
+
+
+            <div class="calculation" id="maxAccelerationGraph" style="min-height: 300px; padding: 0px;">
+            <canvas class="flot-base" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 868px; height: 300px;" width="868" height="300"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 25px;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 125px;">25</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 228px;">50</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 332px;">75</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 432px;">100</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 536px;">125</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 639px;">150</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 743px;">175</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 278px; left: 846px;">200</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 263px; left: 16px;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 197px; left: 2px;">200</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 132px; left: 2px;">400</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 66px; left: 2px;">600</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 2px;">800</div></div></div><canvas class="flot-overlay" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 868px; height: 300px;" width="868" height="300"></canvas></div>
+            
+
+            <script type="text/javascript"> 
+
+            function AccelerationMaxSpeed(){ 
+            var StepSize, Microstepping, BeltPitch, ToothCount;
+            Acceleration = parseFloat($("#acceleration #maxSpeed #acceleration").val());
+            Distance = parseInt($("#acceleration #maxSpeed #distance").val());
+            Speed = parseFloat($("#acceleration #maxSpeed #speed").val());
+            var StepsPerMM;
+            StepsPerMM = ((360/StepSize)*Microstepping)/(BeltPitch*ToothCount);
+            $("#steppers #belt .answer").text(StepsPerMM.toFixed(2)); 
+
+            $("#steppers #belt .CopyToothCount").text(ToothCount);
+            $("#steppers #belt .CopyStepSize").text(StepSize);
+            $("#steppers #belt .CopyMicroStepping").text(Microstepping);
+            $("#steppers #belt .CopyBeltPitch").text(BeltPitch);
+
+            // graph
+            acceleration = Acceleration;
+            axisLenght = Distance;
+            speed = Speed;
+
+            timeToFullSpeed = speed/acceleration;
+            distanceToFullSpeed = (acceleration*timeToFullSpeed*timeToFullSpeed)/2;
+
+            
+            var d2 = [];
+            if((axisLenght/2)<= distanceToFullSpeed){
+              time = Math.sqrt((axisLenght)/acceleration);
+              speed = acceleration*time;
+              timeToFullSpeed = speed/acceleration;
+              distanceToFullSpeed = (acceleration*timeToFullSpeed*timeToFullSpeed)/2;
+              
+            }else{
+            d2.push([distanceToFullSpeed, speed]);
+            d2.push([axisLenght-distanceToFullSpeed, speed]);
+
+            }
+
+            var d1 = [];
+            
+            for (var i = 0; i <= axisLenght/2; i += axisLenght/400) {
+              time = Math.sqrt((2*i)/acceleration);
+              speed = acceleration*time;
+              d1.push([i, speed]);
+            }
+
+            decelerationStartsAt = axisLenght-distanceToFullSpeed;
+
+            for (var i = axisLenght/2; i <= axisLenght; i += axisLenght/400) {
+              fakeDistance = axisLenght-i;
+              time = Math.sqrt((2*fakeDistance)/acceleration);
+              speed = acceleration*time;
+              d1.push([i, speed]);
+            }
+
+
+            $.plot("#maxAccelerationGraph", [ d1, d2]);
+
+            }
+
+            $("#acceleration #maxSpeed .change").change(function () {
+              AccelerationMaxSpeed();
+            });
+            AccelerationMaxSpeed();
+
+            
+             
+            </script>
+
+
+          </div> <!-- END OF BELTS -->
+        </section>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Design heavily based on awesome <a href="http://twitter.github.io/bootstrap/">Bootstrap</a>! I can't even express how much I love this thing. Thank you!</p>
+        <p>Calculator3 by Josef Prusa</p>
+        
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="./RepRap Calculator3_files/widgets.js"></script></body></html>
+            <td>Step angle</td>
